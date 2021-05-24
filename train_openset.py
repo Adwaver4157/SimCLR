@@ -84,7 +84,7 @@ def get_args():
     parser.add_argument('--lr', type=float, default=0.01)
     parser.add_argument('--lr_step_list', type=float, nargs="*", default=[30000, 60000])
 
-    parser.add_argument('--resume', type=str, default="")
+    parser.add_argument('--resume', type=str, default="/home/ubuntu/SimCLR/runs/May11_13-32-51_ip-172-31-26-32/checkpoint_0200.pth.tar")
     parser.add_argument('--debug', action='store_true')
     parser.add_argument('--vis', action='store_true')
     parser.add_argument('--save_model', action='store_true')
