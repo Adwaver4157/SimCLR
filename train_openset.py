@@ -270,16 +270,15 @@ def main():
                 labels = labels.to(device)
 
                 optimizer.zero_grad()
-                print("before")
+
                 out = model(batch["imgs"])
-                print("out")
                 loss = criterion(out, labels)
-                print("after")
 
                 if args.debug and iter_cnt % 10 == 0:
                     print(np.round(loss.item(), 3))
-
+                print("before")
                 loss.backward()
+                print("after")
                 nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0, norm_type=2)
                 optimizer.step()
                 scheduler.step()
