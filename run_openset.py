@@ -68,7 +68,7 @@ def run(model_path, data_file, exp_name, out_dir, accimage=False, batch_size=32,
                     transforms.ToTensor(),
                     transforms.Normalize(mean=[0.5, 0.5, 0.5],
                                          std=[0.5, 0.5, 0.5]),
-                    ]),
+                ]),
                 header=True,
             )
 
@@ -106,8 +106,8 @@ def run(model_path, data_file, exp_name, out_dir, accimage=False, batch_size=32,
     except FileNotFoundError:
         print(f'Could not find the model file at {model_path}')
     except KeyError:
-        print(f'Saved model does not have expected format. We expect the checkpoint to have \'model\' and '
-              f'\'state_dict\' keys')
+        print('Saved model does not have expected format. We expect the checkpoint to have \'model\' and '
+              '\'state_dict\' keys')
     except Exception as e:
         print(e)
 
