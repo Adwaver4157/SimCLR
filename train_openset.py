@@ -235,7 +235,7 @@ def main():
 
     if args.resume != "":
         base_model.load_state_dict(torch.load(args.resume), strict=False)
-
+    base_model.fc = nn.Linear(512, 413)
     base_model.to(device)
     model = base_model  # XXX No data parallel so far
 
