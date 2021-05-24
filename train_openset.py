@@ -6,7 +6,8 @@
 #
 # Distributed under terms of the MIT license.
 
-from models.resnet_simclr import ResNetSimCLR
+# from models.resnet_simclr import ResNetSimCLR
+from torchvision.models import resnet18, resnet50
 import warnings
 import argparse
 import os
@@ -220,13 +221,13 @@ def main():
     logger.info(f"Valid set size: {len(valid_dataset)}")
 
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.nb_workers, drop_last=True)
-    """
+
     if args.model == "resnet18":
         base_model = resnet18(pretrained=False, num_classes=413)
     elif args.model == "resnet50":
         base_model = resnet50(pretrained=False, num_classes=413)
-    """
-    base_model = ResNetSimCLR(base_model=args.arch, out_dim=args.out_dim)
+
+    # base_model = ResNetSimCLR(base_model=args.arch, out_dim=args.out_dim)
 
     logger.info("Model: {}".format(base_model.__class__.__name__))
     logger.info("Output dir: {}".format(save_dir))
@@ -235,7 +236,7 @@ def main():
 
     if args.resume != "":
         base_model.load_state_dict(torch.load(args.resume), strict=False)
-    base_model.fc = nn.Linear(512, 413)
+    # base_model.fc = nn.Linear(512, 413)
     base_model.to(device)
     model = base_model  # XXX No data parallel so far
 
