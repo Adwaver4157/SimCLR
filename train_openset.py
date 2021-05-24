@@ -270,9 +270,11 @@ def main():
                 labels = labels.to(device)
 
                 optimizer.zero_grad()
-
+                print("before")
                 out = model(batch["imgs"])
+                print("out")
                 loss = criterion(out, labels)
+                print("after")
 
                 if args.debug and iter_cnt % 10 == 0:
                     print(np.round(loss.item(), 3))
