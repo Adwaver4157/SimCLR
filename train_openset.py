@@ -100,6 +100,8 @@ def get_args():
                         help='model architecture: ' +
                         ' | '.join(model_names) +
                         ' (default: resnet50)')
+    parser.add_argument('--out_dim', default=128, type=int,
+                        help='feature dimension (default: 128)')
     args = parser.parse_args()
 
     return args
