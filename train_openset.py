@@ -236,6 +236,7 @@ def main():
 
     if args.resume != "":
         base_model.load_state_dict(torch.load(args.resume), strict=False)
+        print("Load pretrained weight.")
     # base_model.fc = nn.Linear(512, 413)
     base_model.to(device)
     model = base_model  # XXX No data parallel so far
@@ -277,9 +278,7 @@ def main():
 
                 if args.debug and iter_cnt % 10 == 0:
                     print(np.round(loss.item(), 3))
-                print("before")
                 loss.backward()
-                print("after")
                 nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0, norm_type=2)
                 optimizer.step()
                 scheduler.step()
