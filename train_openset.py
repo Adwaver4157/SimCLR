@@ -27,6 +27,7 @@ from torch.utils.data import DataLoader
 
 import torchvision.transforms as transforms
 from torchvision.datasets import DatasetFolder
+from torchvision import models
 
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -41,6 +42,10 @@ logger = MLLogger(init=False)
 warnings.simplefilter('ignore', UserWarning)
 
 IMG_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif', '.tiff', '.webp')
+
+model_names = sorted(name for name in models.__dict__
+                     if name.islower() and not name.startswith("__")
+                     and callable(models.__dict__[name]))
 
 
 def loader_func(impath):
@@ -90,6 +95,11 @@ def get_args():
     parser.add_argument('--save_model', action='store_true')
     parser.add_argument('--eval', action='store_true')
     parser.add_argument('--seed', type=int, default=1701)  # XXX
+    parser.add_argument('-a', '--arch', metavar='ARCH', default='resnet18',
+                        choices=model_names,
+                        help='model architecture: ' +
+                        ' | '.join(model_names) +
+                        ' (default: resnet50)')
     args = parser.parse_args()
 
     return args
