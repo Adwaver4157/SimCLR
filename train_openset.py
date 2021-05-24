@@ -199,8 +199,8 @@ def main():
 
     device = torch.device("cuda:{}".format(0)) if torch.cuda.is_available() else torch.device("cpu")
 
-    root_train_dir = "data/dataset-open-world-vision-challenge/train/known_classes/"
-    root_valid_dir = "data/dataset-open-world-vision-challenge/"
+    root_train_dir = "/data/dataset-open-world-vision-challenge/train/known_classes/"
+    root_valid_dir = "/data/dataset-open-world-vision-challenge/"
     train_dataset = DatasetFolder(root_train_dir, loader_func, extensions=IMG_EXTENSIONS)
     valid_dataset = EvalDataset(args.gt_file, root_valid_dir, header=True)
 
